@@ -1,0 +1,41 @@
+PART 1:
+
+-- Create Customer table
+CREATE TABLE Customer (
+    CustomerID VARCHAR2(20) PRIMARY KEY,
+    CustomerName VARCHAR2(20) NOT NULL,
+    CustomerTel INT
+);
+
+-- Create Product table
+CREATE TABLE Product (
+    ProductID VARCHAR2(20) PRIMARY KEY,
+    ProductName VARCHAR2(20) NOT NULL,
+    Price DECIMAL(10, 2) CHECK (Price > 0) -- Added constraint for positive value
+);
+
+-- Create Orders table
+CREATE TABLE Orders (
+    CustomerID VARCHAR2(20),
+    ProductID VARCHAR2(20),
+    Quantity INT,
+    TotalAmount INT,
+    PRIMARY KEY (CustomerID, ProductID),
+    FOREIGN KEY (CustomerID) REFERENCES Customer(CustomerID),
+    FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+);
+
+
+
+PART 2:
+
+** Add a column Category to the PRODUCT table:
+ALTER TABLE Product
+ADD Category VARCHAR2(20);
+
+**Add a column OrderDate to the ORDERS table with SYSDATE as default value:
+ALTER TABLE Orders
+ADD OrderDate DATE DEFAULT SYSDATE;
+
+
+
